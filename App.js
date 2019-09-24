@@ -1,11 +1,11 @@
 import React, {Fragment} from 'react';
 import {Text, View} from 'react-native';
-import Header from './src/publics/components/Header'
+import Header from './src/Components/Navigations/Header'
 
 const App = () => {
   return (
     // <Fragment>
-    <View style={{backgroundColor: 'grey'}}>
+    <View>
       <Header />
       <Text>This is HomePage</Text>
     </View>
