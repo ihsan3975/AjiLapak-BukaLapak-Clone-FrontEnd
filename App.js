@@ -6,6 +6,7 @@ import CardBukaMart from './src/Components/Items/CardBukaMart'
 import CardSpesialUntukmu from './src/Components/Items/CardSpesialUntukmu'
 import CardMenuFavorit from './src/Components/Items/CardMenuFavorit'
 import CardMaudiGaransi from './src/Components/Items/CardMaudiGaransi'
+import CardCategoryHome from './src/Components/Items/CardCategoryHome'
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <CardSpesialUntukmu />
         <CardMenuFavorit />
         <CardMaudiGaransi />
+        <CardCategoryHome />
       </ScrollView>
     </View>
     // </Fragment>
