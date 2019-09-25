@@ -1,34 +1,35 @@
 import React, {PureComponent} from 'react';
-import {StyleSheet, TouchableOpacity, Image, Text, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, Image, Text, View, StatusBar} from 'react-native';
 
 class Header extends PureComponent {
   render() {
     return (
-      <View style={{height: 45, flexDirection: 'row', justifyContent: 'space-between'}}>
+      <View style={{backgroundColor: 'white', height: 50, flexDirection: 'row', justifyContent: 'space-between', paddingTop: 5}}>
+        <StatusBar backgroundColor='#fff' barStyle='dark-content'/>
           <View style={{flexDirection: 'row'}}>
-            <View style={{justifyContent: 'center', margin: 5}}>
-                <Image source={require('../../Assests/images/icon/dana-logo.png')} style={{height: 30, width: 30}}/>
+            <View style={{justifyContent: 'center', margin: 11}}>
+                <Image source={require('../../Assests/images/icon/dana-logo.png')} style={{height: 24, width: 24}}/>
             </View>
             <View style={{flexDirection: 'column', justifyContent: 'center', margin: 5}}>
-                <Text style={{color: '#d71149', fontWeight: '600'}}>Hubungkan</Text>
+                <Text style={{color: '#d71149', fontSize: 12, marginBottom: 2}}>Hubungkan</Text>
                 <View style={{flexDirection: 'row', flex: 1}}>
-                    <Text style={{fontSize: 15, fontWeight: '700'}}>DANA</Text>
-                    <Image source={require('../../Assests/images/icon/right.png')} style={{resizeMode: 'stretch', height: 17, width: 17, marginLeft: 5}}/>
+                    <Text style={{fontSize: 13, fontWeight: '700'}}>DANA</Text>
+                    <Image source={require('../../Assests/images/icon/right.png')} style={{resizeMode: 'stretch', height: 14, width: 14, marginLeft: 7}}/>
                 </View>
             </View>
           </View>
           
-          <View style={{flexDirection: 'row'}}>
-            <TouchableOpacity style={{alignItems: 'flex-end', justifyContent: 'center', margin: 3}}>
+          <View style={{flexDirection: 'row', marginRight: 5}}>
+            <TouchableOpacity style={{alignItems: 'flex-end', justifyContent: 'center', marginHorizontal: 7}}>
                 <Image source={require('../../Assests/images/icon/ico_scan_barcode.png')} style={{height: 26, width: 26}}/>
             </TouchableOpacity>
-            <TouchableOpacity style={{alignItems: 'flex-end', justifyContent: 'center', margin: 3}}>
+            <TouchableOpacity style={{alignItems: 'flex-end', justifyContent: 'center', marginHorizontal: 7}}>
                 <Image source={require('../../Assests/images/icon/ico_notification_minor.png')} style={{height: 26, width: 26}}/>
             </TouchableOpacity>
-            <TouchableOpacity style={{alignItems: 'flex-end', justifyContent: 'center', margin: 3}}>
+            <TouchableOpacity style={{alignItems: 'flex-end', justifyContent: 'center', marginHorizontal: 7}}>
                 <Image source={require('../../Assests/images/icon/ico_chat.png')} style={{height: 26, width: 26}}/>
             </TouchableOpacity>
-            <TouchableOpacity style={{alignItems: 'flex-end', justifyContent: 'center', margin: 3}}>
+            <TouchableOpacity style={{alignItems: 'flex-end', justifyContent: 'center', marginHorizontal: 7}}>
                 <Image source={require('../../Assests/images/icon/ico_cart.png')} style={{height: 26, width: 26}}/>
             </TouchableOpacity>
           </View>          
