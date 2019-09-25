@@ -36,7 +36,8 @@ class CardProducts extends Component {
     render() {
         return (
             <ScrollView>
-            <View>            
+            {/* <View>             */}
+                {/* <Text>Rekomendasi</Text> */}
                     <View style={{flexDirection: 'row'}}>
                         <FlatList
                             showsVerticalScrollIndicator={false}
@@ -46,16 +47,18 @@ class CardProducts extends Component {
                             renderItem={({ item }) =>
                                 <View backgroundColor='#fff' style={{flex: 1}}>
                                     <TouchableOpacity style={styles.parent}>
-                                        <Image source={{uri: item.image}} style={{height: 75, width: 75, margin: 5}}/>
+                                        <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                                            <Image source={{uri: item.image}} style={{height: 156, width: 156, margin: 5}}/>
+                                        </View>
                                         <Text style={styles.text}>{item.name}</Text>
-                                        <Text>Rp{item.price}</Text>
+                                        <Text style={{fontSize: 11, position: 'absolute', bottom: 0}}>Rp{item.price}</Text>
                                     </TouchableOpacity>
                                 </View>
                             }
                             keyExtractor={({id}) => id}
                         />
                     </View>
-            </View>
+            {/* </View> */}
                 </ScrollView>
         );
     }
@@ -68,14 +71,14 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         width: 156,
         height: 215,
-        alignItems: 'center',
-        justifyContent: 'center',
+        // alignItems: 'center',
+        // justifyContent: 'center',
         borderRadius: 4,
         // height: 30
         // flexDirection: 'row'
     },
     text: {
-        fontSize: 13,
+        fontSize: 12,
         color: '#000',
         // margin: 7
     },
