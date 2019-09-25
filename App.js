@@ -1,5 +1,6 @@
 import React, {Fragment} from 'react';
 import {Text, View, ScrollView} from 'react-native';
+
 import Header from './src/Components/Navigations/Header'
 import SearchBar from './src/Components/Items/SearchBar'
 import CardBukaMart from './src/Components/Items/CardBukaMart'
