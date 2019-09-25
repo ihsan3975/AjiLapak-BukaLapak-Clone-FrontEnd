@@ -1,46 +1,36 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import axios from 'axios'
 import {StyleSheet, TouchableOpacity, Image, Text, View, TextInput, FlatList} from 'react-native';
 
-class Categories extends PureComponent {
-    state = {
-        categories: []
-    }
-
-    componentDidMount = () => {
-        axios.get(`http://192.168.43.134:3000/categories`)
-        .then(response => {
-            // console.log(response)           
-            this.setState({
-            categories: response.data.value.data.name
+class Categories extends Component {
+  state = {
+    categories: [],
+  };
+  async componentDidMount() {
+    await axios
+      .get(
+        `http://192.168.43.134:8080/categories`
+      )
+      .then(res =>
+        this.setState({
+          categories: res.data.value.data
         })
-    }
-        )
-        console.log(this.state)
-    }
-
-    // async getCategories() {
-    //     console.log('hi')
-    //     await axios.get(`http://192.168.43.134:3000/categories`).then(response => 
-    //     this.setState({
-    //         categories: response.data
-    //     }))
-    //     console.log(this.state)
-    // }
-
+      );
+    console.log(this.state);
+  }
 
   render() {
     return (
-      <View>
+      <View style={{flexDirection: 'row'}}>
         <FlatList
             // style={styles.container}
             data={this.state.categories}
             renderItem={({item}) => (
-              <TouchableOpacity>
-                <Text style={{fontSize: 20}}>{item.name}</Text>
-              </TouchableOpacity>
+              <View style={{flexDirection: 'row'}}>
+                <Text style={{fontSize: 20, flexDirection: 'row'}}>{item.name}</Text>
+              </View>
             )}
-            keyExtractor={({id}, index) => id.toString()}
+            keyExtractor={({id}, index) => id}
           />          
           <Text>cob</Text>
       </View>
