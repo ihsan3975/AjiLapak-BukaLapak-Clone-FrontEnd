@@ -9,6 +9,7 @@ import CardSpesialUntukmu from '../Components/Items/CardSpesialUntukmu'
 import CardMenuFavorit from '../Components/Items/CardMenuFavorit'
 import CardMaudiGaransi from '../Components/Items/CardMaudiGaransi'
 import CardCategoryHome from '../Components/Items/CardCategoryHome'
+import CardProcuts from '../Components/Items/CardProducts'
 // import RegisterModal from "./RegisterModal";
 
 class Home extends Component {
@@ -23,6 +24,7 @@ class Home extends Component {
                 <CardMenuFavorit />
                 <CardMaudiGaransi />
                 <CardCategoryHome />
+                <CardProcuts />
             </ScrollView>
         </View>
         );

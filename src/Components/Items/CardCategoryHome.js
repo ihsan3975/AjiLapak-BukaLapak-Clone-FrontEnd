@@ -8,14 +8,15 @@ import {
     ScrollView
 }
 from 'react-native';
+import {withNavigation} from 'react-navigation'
 
-export default class CardCategoryHome extends Component {
+export class CardCategoryHome extends Component {
     render(){
         return(
             <View style={styles.container}>
                 <View style={{flex:1,paddingHorizontal:10,paddingVertical:10}}>
                     <Text style={{fontSize:16,fontWeight:'600',margin:5}}>Kategori Barang</Text> 
-                    <TouchableOpacity style={{position: 'absolute', right: 15, top: 15}}>
+                    <TouchableOpacity style={{position: 'absolute', right: 15, top: 15}} onPress={() => { this.props.navigation.navigate('CategoriesList')}}>
                         <Text style={{fontSize: 12, color: '#D71149'}}>Lihat Semua</Text>
                     </TouchableOpacity>
                 </View>
@@ -95,3 +96,5 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
 });
+
+export default withNavigation(CardCategoryHome)
