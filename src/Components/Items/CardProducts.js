@@ -38,7 +38,7 @@ class CardProducts extends Component {
             <ScrollView>
             {/* <View>             */}
                 {/* <Text>Rekomendasi</Text> */}
-                    <View style={{flexDirection: 'row'}}>
+                    <View style={{flexDirection: 'row', marginLeft: 10}}>
                         <FlatList
                             showsVerticalScrollIndicator={false}
                             numColumns={2}
@@ -46,7 +46,8 @@ class CardProducts extends Component {
                             data={this.state.products}
                             renderItem={({ item }) =>
                                 <View backgroundColor='#fff' style={{flex: 1}}>
-                                    <TouchableOpacity style={styles.parent}>
+                                    <TouchableOpacity style={styles.parent}
+                                    onPress>
                                         <View style={{alignItems: 'center', justifyContent: 'center'}}>
                                             <Image source={{uri: item.image}} style={{height: 156, width: 156, margin: 5}}/>
                                         </View>
@@ -66,7 +67,7 @@ class CardProducts extends Component {
 
 const styles = StyleSheet.create({
     parent: {
-        backgroundColor: 'green',
+        backgroundColor: '#fff',
         marginLeft: 16,
         marginBottom: 10,
         width: 156,
