@@ -23,7 +23,7 @@ class CardProducts extends Component {
       async componentDidMount() {
         await axios
           .get(
-            `http://192.168.43.134:8080/products`
+            `http://192.168.0.130:8080/products`
           )
           .then(res =>
             this.setState({
@@ -36,9 +36,9 @@ class CardProducts extends Component {
     render() {
         return (
             <ScrollView>
-            {/* <View>             */}
+            {/* <View>*/}
                 {/* <Text>Rekomendasi</Text> */}
-                    <View style={{flexDirection: 'row', marginLeft: 10}}>
+                    <View style={{flexDirection: 'row'}}>
                         <FlatList
                             showsVerticalScrollIndicator={false}
                             numColumns={2}
@@ -46,12 +46,11 @@ class CardProducts extends Component {
                             data={this.state.products}
                             renderItem={({ item }) =>
                                 <View backgroundColor='#fff' style={{flex: 1}}>
-                                    <TouchableOpacity style={styles.parent}
-                                    onPress>
+                                    <TouchableOpacity style={styles.parent}>
                                         <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                                            <Image source={{uri: item.image}} style={{height: 156, width: 156, margin: 5}}/>
+                                            <Image source={{uri: `http://192.168.0.130:8080/products/images/${item.image}`}} style={{height: 145, width: 145, margin: 5, borderColor: 'red', borderWidth: 1}}/>
                                         </View>
-                                        <Text style={styles.text}>{item.name}</Text>
+                                        <Text style={styles.text} numberOfLines={2}>{item.name}</Text>
                                         <Text style={{fontSize: 11, position: 'absolute', bottom: 0}}>Rp{item.price}</Text>
                                     </TouchableOpacity>
                                 </View>
@@ -67,7 +66,7 @@ class CardProducts extends Component {
 
 const styles = StyleSheet.create({
     parent: {
-        backgroundColor: '#fff',
+        // backgroundColor: 'green',
         marginLeft: 16,
         marginBottom: 10,
         width: 156,
