@@ -50,7 +50,7 @@ class Account extends Component {
                         }}>Menu Lain</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={{
+                {/* <View style={{
                     flex: 1,
                     alignContent: 'center',
                     justifyContent: 'center',
@@ -135,7 +135,7 @@ class Account extends Component {
 
                         </View>
                     </IndicatorViewPager>
-                </View>
+                </View> */}
                 <View style={{
                     flexDirection: 'row',
                     height: 80,

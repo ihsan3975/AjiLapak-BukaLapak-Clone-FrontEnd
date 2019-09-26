@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import _ from 'lodash';
 import { connect } from 'react-redux';
+import {withNavigation} from 'react-navigation';
 import axios from 'axios'
 // import { getCategories } from '../Services/Axios/categories';
 // import SimpleHeader from '../Components/Navigation/SimpleHeader';
@@ -23,7 +24,7 @@ class CardProducts extends Component {
       async componentDidMount() {
         await axios
           .get(
-            `http://192.168.43.134:8080/products`
+            `http://192.168.0.130:8080/products`
           )
           .then(res =>
             this.setState({
@@ -47,9 +48,13 @@ class CardProducts extends Component {
                             renderItem={({ item }) =>
                                 <View backgroundColor='#fff' style={{flex: 1}}>
                                     <TouchableOpacity style={styles.parent}
-                                    onPress>
+                                    onPress={() =>
+                                        this.props.navigation.navigate('DetailProduct', {
+                                          id: item._id,
+                                        })
+                                      }>
                                         <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                                            <Image source={{uri: item.image}} style={{height: 156, width: 156, margin: 5}}/>
+                                            <Image source={{uri: `http://192.168.0.130:8080/products/images/${item.image}`}} style={{height: 156, width: 156, margin: 5}}/>
                                         </View>
                                         <Text style={styles.text}>{item.name}</Text>
                                         <Text style={{fontSize: 11, position: 'absolute', bottom: 0}}>Rp{item.price}</Text>
@@ -106,4 +111,4 @@ const styles = StyleSheet.create({
 //     }
 // };
 
-export default CardProducts;
+export default withNavigation(CardProducts);

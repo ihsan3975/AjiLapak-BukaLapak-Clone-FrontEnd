@@ -9,21 +9,29 @@ import {
     Dimensions,
     View,
 } from 'react-native';
-import {withNavigation} from "react-navigation";
+import {NavigationEvents, withNavigation} from 'react-navigation';
 // import {connect} from "react-redux";
+import axios from 'axios'
 
 class DetailProduct extends Component {
 
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            scrollY: new Animated.Value(0),
-            isWishlist: true,
-            rate: [1, 1, 1, 0, 0]
-        };
+    state = {
+        products: [],
+        scrollY: new Animated.Value(0),
+        isWishlist: true,
+        rate: [1, 1, 1, 0, 0]
     }
 
+     async componentDidMount() {
+        const ProdcutId = this.props.navigation.getParam('id');
+         await axios.get(`http://192.168.0.130:8080/products/${ProdcutId}`)
+        .then(res => this.setState({
+            products: res.data
+        }))
+        
+    }
+    
     toRate(int) {
         let rate = [];
         for (let i = 0; i < int; i++) {
@@ -31,6 +39,13 @@ class DetailProduct extends Component {
         }
         return rate;
     }
+
+    thousands_separators = (num) =>
+  {
+    var num_parts = num.toString().split(".");
+    num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return num_parts.join(".");
+  }
 
     // deleteWishlistRedux(id){
     //     this.props.dispatch(deleteWishList(id,this.props.account.token));
@@ -63,9 +78,9 @@ class DetailProduct extends Component {
     // }
 
     render() {
+        const item = this.state.products
         const {navigation} = this.props;
         let data = navigation.state.params;
-        console.log(data);
         const headerHeight = this.state.scrollY.interpolate({
             inputRange: [0, HEADER_SCROLL_DISTANCE],
             outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
@@ -92,19 +107,21 @@ class DetailProduct extends Component {
                     )}
                 >
                     <View style={styles.scrollViewContent}>
-
                         <View style={styles.description}>
+                             {/* <Image source={{uri: `http://192.168.0.130:8080/products/images/${item.image}`}} 
+                            style={{height: 156, width: 156, margin: 5, backgroundColor: 'green'}}/> */}
+
                             <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                 {/* {this.toRate(data.rating).map((star) =>
                                     <Image style={{width: 10, height: 10}}
-                                           source={require('../Assests/images/iconic_starfilled.png')}/>
+                                           source={require('../Assests/images/icon/air-jordan-7-retro-sp-shoe.jpg')}/>
                                 )} */}
-                                <Text style={{marginLeft: 5, fontSize: 10}}>313 ulasan</Text>
+                                <Text style={{marginLeft: 5, fontSize: 10}}>900 ulasan</Text>
                             </View>
-                            <Text style={{marginTop: 5, fontSize: 16, fontWeight: '300', color: '#000'}}
-                                  numberOfLines={2}>ini nama product</Text>
+                            <Text style={{marginTop: 5, fontSize: 16, fontWeight: '700', color: '#000'}}
+                                  numberOfLines={2}>{item.name}</Text>
                             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                <Text style={{flex: 1}}>Rp. ini harganya</Text>
+                                <Text style={{flex: 1, fontWeight: '700'}}>Rp.{item.price}</Text>
                                 <TouchableOpacity style={{
                                     backgroundColor: '#F4F4F4',
                                     borderRadius: 5,
@@ -141,7 +158,7 @@ class DetailProduct extends Component {
                                        source={require('../Assests/images/icon/ic_cek_ongkir.png')}/>
                                 <View style={{flex: 1, marginLeft: 10}}>
                                     <Text>Ongkir mulai Rp11.000</Text>
-                                    <Text style={{fontSize: 10}}>Pengiriman ke Batujajar</Text>
+                                    <Text style={{fontSize: 10}}>Pengiriman ke Bandung</Text>
                                 </View>
                                 <Image style={{width: 28, height: 28, opacity: 0.7}}
                                        source={require('../Assests/images/icon/ico_chevron_right_minor.png')}/>
@@ -165,7 +182,7 @@ class DetailProduct extends Component {
                         <View style={{marginTop: 20, backgroundColor: '#FFF', padding: 10}}>
                             <View>
                                 <View style={{flexDirection: 'row'}}>
-                                    <Text style={{color: '#111', fontSize: 15, fontWeight: '500', flex: 1}}>
+                                    <Text style={{color: '#111', fontSize: 15, fontWeight: '700', flex: 1}}>
                                         Informasi Barang
                                     </Text>
                                     <Text style={{
@@ -180,7 +197,7 @@ class DetailProduct extends Component {
                                 </View>
                                 <View style={{flexDirection: 'row', marginTop: 20}}>
                                     <Text style={{color: '#666', fontSize: 12, flex: 1}}>Stok</Text>
-                                    <Text style={{color: '#666', fontSize: 12,}}>>ini data stok</Text>
+                                    <Text style={{color: '#666', fontSize: 12,}}>> {item.stock}</Text>
                                 </View>
                                 <View style={{flexDirection: 'row', marginTop: 20, marginBottom: 10}}>
                                     <Text style={{color: '#666', fontSize: 12, flex: 1}}>Terjual</Text>
@@ -188,18 +205,18 @@ class DetailProduct extends Component {
                                 </View>
                             </View>
                             <View style={{padding: 10, borderTopWidth: 2, borderTopColor: '#F5F5F5'}}>
-                                <Text>ini adalah kolum deskripsi yang akan diisikan data.deskripsi
+                                <Text>{item.description}
                                 </Text>
-                                <TouchableOpacity
+                                {/* <TouchableOpacity
                                     style={{marginTop: 10, flex: 1, alignItems: 'center', paddingTop: 10}}>
                                     <Text
                                         style={{color: '#D71149', fontSize: 15, fontWeight: '300'}}>Selengkapnya</Text>
-                                </TouchableOpacity>
+                                </TouchableOpacity> */}
                             </View>
                         </View>
 
                         <View style={{padding: 10, backgroundColor: '#FFF', marginBottom: 20, marginTop: 20}}>
-                            <Text style={{fontSize: 16, color: '#000', fontWeight: '500'}}>Pelapak</Text>
+                            <Text style={{fontSize: 16, color: '#000', fontWeight: '700'}}>Pelapak</Text>
 
                             <View style={{alignItems: 'center', marginTop: 10, flexDirection: 'row'}}>
                                 <View style={{borderWidth: 1, borderColor: '#F3F3F3', borderRadius: 25}}>
@@ -227,6 +244,7 @@ class DetailProduct extends Component {
                         </View>
                     </View>
                 </ScrollView>
+            
 
                 <View style={{borderTopRadius: 1, height: 55, padding: 10, flexDirection: 'row'}}>
                     <TouchableOpacity style={{
@@ -265,35 +283,34 @@ class DetailProduct extends Component {
                 </View>
 
                 <Animated.View style={[styles.header, {height: headerHeight}]}>
-                    {/* <Animated.Image
+                    <Animated.Image
                         style={[
                             styles.backgroundImage,
                             {opacity: imageOpacity, transform: [{translateY: imageTranslate}]},
                         ]}
-                        source={{uri : data.image[0]}}
-                    /> */}
+                        source={{uri : `http://192.168.0.130:8080/products/images/${item.image}`}}
+                    />
                     <View style={styles.bar}>
                         <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
                             <Image source={require('../Assests/images/icon/h5_title_bar_back_btn.png')}
                                    style={{width: 25, height: 25, margin: 10}}/>
                         </TouchableOpacity>
-                        <Text numberOfLines={1}a style={styles.title}>Product</Text>
+                        <Text numberOfLines={1}a style={styles.title}>{item.name}</Text>
                         <TouchableOpacity>
                             <Image source={require('../Assests/images/icon/ico_cart.png')}
                                    style={{opacity: 0.7, width: 20, height: 20, marginLeft: 15, marginRight: 20}}/>
                         </TouchableOpacity>
-                        <TouchableOpacity
-                        // onPress={() => this.cekWishlistRedux(data._id)}
-                        >
-                            {/* {this.wishlist(data._id)?
-                                <Image source={require('../Assests/images/icon/ico_heart.png')} style={{opacity: 0.7, width: 20, height: 20, marginRight: 15}}/>:
-                                <Image source={require('../Assests/images/icon/ico_heart_red.png')} style={{opacity: 0.7, width: 20, height: 20, marginRight: 15}}/>} */}
+                        <TouchableOpacity>
+                         <Image source={require('../Assests/images/icon/ico_heart.png')} 
+                            style={{opacity: 0.7, width: 20, height: 20, marginRight: 15}}/>
+                             {/* :
+                         <Image source={require('../Assests/images/icon/ico_heart_red.png')} 
+                         style={{opacity: 0.7, width: 20, height: 20, marginRight: 15}}/> */}
 
                         </TouchableOpacity>
                         <TouchableOpacity>
-                            <Text>more vertical</Text>
-                            {/* <Image source={require('../Assests/images/icon/ico_more_vertical.png')}
-                                   style={{opacity: 0.7, width: 20, height: 20, margin: 10}}/> */}
+                            <Image source={require('../Assests/images/icon/ico_more_vertical.png')}
+                                   style={{opacity: 0.7, width: 20, height: 20, margin: 10}}/>
                         </TouchableOpacity>
                     </View>
                 </Animated.View>
@@ -353,7 +370,7 @@ const styles = StyleSheet.create({
     },
     backgroundImage: {
         position: 'absolute',
-        top: 0,
+        top: 50,
         left: 0,
         right: 0,
         width: null,

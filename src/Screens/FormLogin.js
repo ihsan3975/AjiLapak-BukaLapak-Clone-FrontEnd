@@ -24,27 +24,45 @@ class FormLogin extends Component {
         }
     }
 
-    async postLogin(username, password) {
-        const data = {username: username, password: password}
-        await this.props.dispatch(login(data));
-        if (this.props.users.error) {
-            Alert.alert("", 'Username atau password yang anda masukan salah. silahkan coba lagi', [
-                    {text: 'COBA LAGI', style: 'destructive'},
-                ],
-                {cancelable: false},
-            )
-        } else {
-            this.props.dispatch(getAccount(this.props.users.token));
-            this.props.navigation.navigate('Home');
-        }
-    };
-
     // async postLogin(username, password) {
     //     const data = {username: username, password: password}
-    //     await Axios.post('http://192.168.43.134:8080/login', data)
-    //     this.props.navigation.navigate('Home');
-    // }
+    //     await this.props.dispatch(login(data));
+    //     if (this.props.users.error) {
+    //         Alert.alert("", 'Username atau password yang anda masukan salah. silahkan coba lagi', [
+    //                 {text: 'COBA LAGI', style: 'destructive'},
+    //             ],
+    //             {cancelable: false},
+    //         )
+    //     } else {
+    //         this.props.dispatch(getAccount(this.props.users.token));
+    //         this.props.navigation.navigate('Home');
+    //     }
+    // };
 
+    async postLogin(username, password) {
+        const data = {username: username, password: password}
+        await this.props.dispatch(login(data))
+        this.setState({
+            token: this.props.users.userProfile
+        })
+        console.log(this.props.users.token.data.token)
+        const token = this.props.users.token.data.token
+        const status = this.props.users.token.data.status
+
+        console.log(status)
+
+
+
+        if (!this.props.users.token.data.token) {
+            console.log('salah email woy')
+            alert('Wrong Email or Password');
+        } else {
+            console.log('bagus')
+            AsyncStorage.setItem('token', this.props.users.token.data.token);
+            this.props.navigation.navigate('Home');
+        }
+
+    }
 
     render() {
         return (
@@ -103,7 +121,7 @@ class FormLogin extends Component {
                             <View style={{flexDirection: 'row', justifyContent: 'center'}}>
                                 <Text style={styles.textFoot}>Belum punya akun?</Text>
                                 <TouchableOpacity
-                                    // onPress={() => this.props.navigation.navigate("FormRegister")} 
+                                    onPress={() => this.props.navigation.navigate("FormRegister")} 
                                     >
                                     <Text style={[styles.textFoot, {color: '#D71149', fontWeight: '500'}]}> Daftar
                                         Sekarang</Text>
@@ -197,11 +215,11 @@ const styles = StyleSheet.create({
     }
 });
 
-// const mapsStageToProps = (state) => {
-//     return {
-//         users : state.users
-//     }
-// };
+const mapsStageToProps = (state) => {
+    return {
+        users : state.users
+    }
+};
 
-// export default connect(mapsStageToProps)(FormLogin);
-export default FormLogin
+export default connect(mapsStageToProps)(FormLogin);
+// export default FormLogin
