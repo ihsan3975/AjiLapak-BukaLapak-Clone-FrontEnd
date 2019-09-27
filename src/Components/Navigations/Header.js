@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import {StyleSheet, TouchableOpacity, Image, Text, View, StatusBar} from 'react-native';
+import {withNavigation} from 'react-navigation'
 
 class Header extends PureComponent {
   render() {
@@ -29,7 +30,7 @@ class Header extends PureComponent {
             <TouchableOpacity style={{alignItems: 'flex-end', justifyContent: 'center', marginHorizontal: 7}}>
                 <Image source={require('../../Assests/images/icon/ico_chat.png')} style={{height: 26, width: 26}}/>
             </TouchableOpacity>
-            <TouchableOpacity style={{alignItems: 'flex-end', justifyContent: 'center', marginHorizontal: 7}}>
+            <TouchableOpacity style={{alignItems: 'flex-end', justifyContent: 'center', marginHorizontal: 7}} onPress={() => this.props.navigation.navigate('CartList')}>
                 <Image source={require('../../Assests/images/icon/ico_cart.png')} style={{height: 26, width: 26}}/>
             </TouchableOpacity>
           </View>          
@@ -38,4 +39,4 @@ class Header extends PureComponent {
   }
 }
 
-export default Header;
+export default withNavigation(Header)

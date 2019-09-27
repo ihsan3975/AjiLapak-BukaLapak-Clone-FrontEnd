@@ -5,7 +5,7 @@ import users from './users';
 // import categories from './categories';
 
 const rootReducers = combineReducers({
-  users
+     users
 //   products,
 //   categories,
 });

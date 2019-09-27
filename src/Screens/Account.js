@@ -8,12 +8,12 @@ import {
     Platform
 } from 'react-native';
 
-import {IndicatorViewPager, PagerDotIndicator} from "react-native-view-pager";
+// import {IndicatorViewPager, PagerDotIndicator} from "react-native-view-pager";
 
 class Account extends Component {
-    _renderIndicator() {
-        return <PagerDotIndicator pageCount={4}/>
-    }
+    // _renderIndicator() {
+    //     return <PagerDotIndicator pageCount={4}/>
+    // }
 
     render() {
         return (

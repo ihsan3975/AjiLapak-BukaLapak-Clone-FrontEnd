@@ -19,7 +19,7 @@ import CardCategoryHome from './src/Components/Items/CardCategoryHome'
 import Categories from './src/Screens/Categories'
 
 import Home from './src/Screens/Home'
-import Discover from './src/Screens/Discover'
+import Profile from './src/Screens/Profile'
 import BukaMall from './src/Screens/BukaMall'
 import Transaction from './src/Screens/Transaction'
 import Account from './src/Screens/Account'
@@ -27,7 +27,10 @@ import CategoriesList from './src/Screens/CategoriesList'
 import FormLogin from './src/Screens/FormLogin'
 import FormRegister from './src/Screens/FormRegister'
 import DetailProduct from './src/Screens/DetailProduct';
-
+import EditProfile from './src/Screens/EditProfile'
+import Checkout from './src/Screens/Checkout'
+import Wishlist from './src/Screens/Wishlist'
+import CartList from './src/Screens/CartList'
 
 const logger = createLogger();
 const store = createStore(reducer, applyMiddleware(logger, Rpm));
@@ -43,7 +46,11 @@ const Routes = createStackNavigator(
   {
     Home,
     // CategoriesList,
-    DetailProduct
+    DetailProduct,
+    EditProfile,
+    Checkout,
+    CartList
+
   },
   {
     headerMode: 'none',
@@ -68,10 +75,10 @@ const MainNavigator = createBottomTabNavigator(
           }
       }),
   },
-    Discover: {
-      screen: Discover,
+    Favorit: {
+      screen: Wishlist,
       navigationOptions: {
-          title: 'Discover',
+          title: 'Favorit',
           tabBarIcon: ({focused}) => (
               focused ?
                   <Image style={styles.icon}
@@ -89,7 +96,7 @@ const MainNavigator = createBottomTabNavigator(
       },
   },
     BukaMall: {
-      screen: BukaMall,
+      screen: Profile,
       navigationOptions: {
           title: 'BukaMall',
           tabBarIcon: ({focused}) => (

@@ -11,8 +11,8 @@ import {
 } from 'react-native';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import {withNavigation} from 'react-navigation';
 import axios from 'axios'
+import {withNavigation} from 'react-navigation';
 // import { getCategories } from '../Services/Axios/categories';
 // import SimpleHeader from '../Components/Navigation/SimpleHeader';
 
@@ -37,34 +37,35 @@ class CardProducts extends Component {
     render() {
         return (
             <ScrollView>
-            {/* <View>             */}
-                {/* <Text>Rekomendasi</Text> */}
-                    <View style={{flexDirection: 'row', marginLeft: 10}}>
-                        <FlatList
-                            showsVerticalScrollIndicator={false}
-                            numColumns={2}
-                            style={{flexDirection: 'row'}}
-                            data={this.state.products}
-                            renderItem={({ item }) =>
-                                <View backgroundColor='#fff' style={{flex: 1}}>
-                                    <TouchableOpacity style={styles.parent}
-                                    onPress={() =>
-                                        this.props.navigation.navigate('DetailProduct', {
-                                          id: item._id,
-                                        })
-                                      }>
-                                        <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                                            <Image source={{uri: `http://192.168.0.130:8080/products/images/${item.image}`}} style={{height: 156, width: 156, margin: 5}}/>
-                                        </View>
-                                        <Text style={styles.text}>{item.name}</Text>
-                                        <Text style={{fontSize: 11, position: 'absolute', bottom: 0}}>Rp{item.price}</Text>
-                                    </TouchableOpacity>
-                                </View>
-                            }
-                            keyExtractor={({id}) => id}
-                        />
+                    <View style={{flexDirection: 'row'}}>
+                        <View style={{backgroundColor: 'white'}}>
+                            <Text style={{marginLeft: 15, marginBottom: 9, fontSize: 15}}>Rekomendasi</Text>
+                            <FlatList
+                                showsVerticalScrollIndicator={false}
+                                numColumns={2}
+                                style={{flexDirection: 'row'}}
+                                data={this.state.products}
+                                renderItem={({ item }) =>
+                                    <View style={{flex: 1}}>
+                                        <TouchableOpacity
+                                         onPress={() =>
+                                            this.props.navigation.navigate('DetailProduct', {
+                                              id: item._id,
+                                            })
+                                          } 
+                                        style={styles.parent}>
+                                            <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                                                <Image source={{uri: `http://192.168.0.130:8080/products/images/${item.image}`}} style={{height: 145, width: 145, margin: 5, borderColor: '#e5e5e5', borderWidth: 1, borderRadius: 4}}/>
+                                            </View>
+                                            <Text style={styles.text} numberOfLines={2}>{item.name}</Text>
+                                            <Text style={{fontSize: 12, position: 'absolute', bottom: 0, fontWeight: 'bold'}}>Rp{item.price}</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                }
+                                keyExtractor={({id}) => id}
+                            />
+                        </View>
                     </View>
-            {/* </View> */}
                 </ScrollView>
         );
     }
@@ -72,7 +73,7 @@ class CardProducts extends Component {
 
 const styles = StyleSheet.create({
     parent: {
-        backgroundColor: '#fff',
+        // backgroundColor: 'green',
         marginLeft: 16,
         marginBottom: 10,
         width: 156,
@@ -86,6 +87,7 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 12,
         color: '#000',
+        marginTop: 5
         // margin: 7
     },
     searchBar: {
@@ -105,10 +107,4 @@ const styles = StyleSheet.create({
     }
 });
 
-// const mapsStageToProps = (state) => {
-//     return {
-//         categories: state.categories
-//     }
-// };
-
-export default withNavigation(CardProducts);
+export default withNavigation(CardProducts);   

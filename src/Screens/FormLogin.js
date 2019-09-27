@@ -7,7 +7,7 @@ import {
     StatusBar,
     TouchableOpacity,
     TextInput,
-    ScrollView, Alert
+    ScrollView, Alert, AsyncStorage
 }
     from 'react-native';
 import {connect} from 'react-redux';
@@ -54,10 +54,8 @@ class FormLogin extends Component {
 
 
         if (!this.props.users.token.data.token) {
-            console.log('salah email woy')
-            alert('Wrong Email or Password');
+            alert('Username atau password yang anda masukan salah. silahkan coba lagi');
         } else {
-            console.log('bagus')
             AsyncStorage.setItem('token', this.props.users.token.data.token);
             this.props.navigation.navigate('Home');
         }
@@ -70,7 +68,7 @@ class FormLogin extends Component {
                 <StatusBar backgroundColor="#FFF" barStyle="dark-content"/>
                 <View>
                     <TouchableOpacity
-                        // onPress={() => this.props.navigation.goBack(null)}
+                        onPress={() => this.props.navigation.goBack(null)}
                     >
                         <Image style={styles.headIcon} source={require('../Assests/images/icon/ic_back.png')}/>
                     </TouchableOpacity>

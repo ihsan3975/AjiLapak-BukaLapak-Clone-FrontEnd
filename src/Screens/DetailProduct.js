@@ -7,14 +7,13 @@ import {
     Text,
     TouchableOpacity,
     Dimensions,
-    View,
+    View, AsyncStorage
 } from 'react-native';
 import {NavigationEvents, withNavigation} from 'react-navigation';
 // import {connect} from "react-redux";
 import axios from 'axios'
 
 class DetailProduct extends Component {
-
 
     state = {
         products: [],
@@ -40,12 +39,18 @@ class DetailProduct extends Component {
         return rate;
     }
 
-    thousands_separators = (num) =>
-  {
-    var num_parts = num.toString().split(".");
-    num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    return num_parts.join(".");
-  }
+    handlerSubmit = async (id) => {
+        const token = await AsyncStorage.getItem('token')
+        const data = {productId: id}
+        await axios.post(`http://192.168.0.130:8080/wishlist/`, data,
+        {
+            headers: {
+                authorization: token
+            }
+        })
+        alert('Add to Wishlist')
+        this.componentDidMount()
+    }
 
     // deleteWishlistRedux(id){
     //     this.props.dispatch(deleteWishList(id,this.props.account.token));
@@ -98,6 +103,9 @@ class DetailProduct extends Component {
         });
 
         return (
+            // <NavigationEvents
+            //     onDidFocus={() => {
+            //         this.getWish()}}/>
             <View style={styles.fill}>
                 <ScrollView
                     style={[styles.fill]}
@@ -271,7 +279,9 @@ class DetailProduct extends Component {
                         <Image style={{width: 20, height: 20}}
                                source={require('../Assests/images/icon/ic_addtocart.png')}/>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{
+                    <TouchableOpacity
+                    onPress={() => this.props.navigation.navigate('Checkout', {id : item._id})} 
+                    style={{
                         flex: 1,
                         borderRadius: 5,
                         alignItems: 'center',
@@ -300,7 +310,7 @@ class DetailProduct extends Component {
                             <Image source={require('../Assests/images/icon/ico_cart.png')}
                                    style={{opacity: 0.7, width: 20, height: 20, marginLeft: 15, marginRight: 20}}/>
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={ () => this.handlerSubmit(item._id)}>
                          <Image source={require('../Assests/images/icon/ico_heart.png')} 
                             style={{opacity: 0.7, width: 20, height: 20, marginRight: 15}}/>
                              {/* :
@@ -326,7 +336,7 @@ class DetailProduct extends Component {
 //     }
 // };
 
-export default DetailProduct;
+export default withNavigation(DetailProduct);
 
 const MAX_WIDTH = Dimensions.get('window').width;
 const HEADER_MAX_HEIGHT = Dimensions.get('window').width;
