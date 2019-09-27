@@ -18,7 +18,7 @@ class Profile extends Component {
 
       getAccount = async () => {
           const token = await AsyncStorage.getItem('token')
-          axios.get(`http://192.168.0.130:8080/users`, {
+          axios.get(`http://192.168.43.134:8080:8080/users`, {
               headers: {
                   authorization : token
               }
@@ -71,7 +71,7 @@ class Profile extends Component {
                             <TouchableOpacity>
                                 {/* <Image style={styles.imgProfile}
                                        source={require('../Assests/images/icon/avatar.png')}/> */}
-                                        <Image source={{uri: `http://192.168.0.130:8080/users/images/${item.imageUrl}`}} style={styles.imgProfile}/>
+                                        <Image source={{uri: `http://192.168.43.134:8080/users/images/${item.imageUrl}`}} style={styles.imgProfile}/>
                             </TouchableOpacity>
                             <View style={{flexDirection: 'row'}}>
                                 <Text numberOfLines={1}
@@ -142,7 +142,7 @@ class Profile extends Component {
                                 Bukalapak!</Text>
                         </View>
                         <TouchableOpacity
-                            // onPress={()=>this.props.navigation.navigate('SellProduct')}
+                            onPress={()=>this.props.navigation.navigate('AddProduct')}
                             style={{
                             height: 40,
                             backgroundColor: '#EE4B60',

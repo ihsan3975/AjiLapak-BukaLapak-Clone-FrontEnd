@@ -20,10 +20,9 @@ import Categories from './src/Screens/Categories'
 
 import Home from './src/Screens/Home'
 import Profile from './src/Screens/Profile'
-import BukaMall from './src/Screens/BukaMall'
+import AddProduct from './src/Screens/AddProduct'
 import Transaction from './src/Screens/Transaction'
 import Account from './src/Screens/Account'
-import CategoriesList from './src/Screens/CategoriesList'
 import FormLogin from './src/Screens/FormLogin'
 import FormRegister from './src/Screens/FormRegister'
 import DetailProduct from './src/Screens/DetailProduct';
@@ -31,6 +30,7 @@ import EditProfile from './src/Screens/EditProfile'
 import Checkout from './src/Screens/Checkout'
 import Wishlist from './src/Screens/Wishlist'
 import CartList from './src/Screens/CartList'
+import CategoriesList from './src/Screens/CategoriesList'
 
 const logger = createLogger();
 const store = createStore(reducer, applyMiddleware(logger, Rpm));
@@ -45,11 +45,13 @@ const styles = StyleSheet.create({
 const Routes = createStackNavigator(
   {
     Home,
-    // CategoriesList,
+    CategoriesList,
     DetailProduct,
     EditProfile,
     Checkout,
-    CartList
+    CartList,
+    Wishlist,
+    AddProduct
 
   },
   {
@@ -163,7 +165,7 @@ const AuthNavigator = createSwitchNavigator(
     Routes,
     // CategoriesList
     FormLogin,
-    FormRegister
+    FormRegister,
   }
 )
 

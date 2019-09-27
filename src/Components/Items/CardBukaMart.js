@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import {StyleSheet, TouchableOpacity, Image, Text, View} from 'react-native';
+import {withNavigation} from 'react-navigation'
 
 class CardBukaMart extends PureComponent {
   render() {
@@ -18,7 +19,7 @@ class CardBukaMart extends PureComponent {
             <Image source={require('../../Assests/images/icon/ic_3.png')} style={styles.icon}/>
             <Text style={styles.title}>VoucherKu</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.menu} onPress={() => { this.props.navigation.navigate('Wishlist', this.props.data)}}>
+          <TouchableOpacity style={styles.menu} onPress={() => { this.props.navigation.navigate('Wishlist')}}>
             <Image source={require('../../Assests/images/icon/ic_4.png')} style={styles.icon}/>
             <Text style={styles.title}>Barang Favorite</Text>
           </TouchableOpacity>
@@ -55,4 +56,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CardBukaMart;
+export default withNavigation(CardBukaMart);

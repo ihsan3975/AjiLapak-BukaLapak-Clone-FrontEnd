@@ -27,7 +27,7 @@ class CartList extends Component {
         const token = await AsyncStorage.getItem('token');
         axios
           .get(
-            `http://192.168.0.130:8080/cart`, {
+            `http://192.168.43.134:8080/cart`, {
                 headers: {
                     authorization : token
                 }
@@ -42,7 +42,7 @@ class CartList extends Component {
 
       handlerSubmit = async (id) => {
         const token = await AsyncStorage.getItem('token');
-        await axios.delete(`http://192.168.0.130:8080/cart/${id}`, {
+        await axios.delete(`http://192.168.43.134:8080/cart/${id}`, {
             headers: {
                 authorization: token
             }
@@ -54,7 +54,7 @@ class CartList extends Component {
       reduceCart = async (id) => {
         const token = await AsyncStorage.getItem('token');
         // const reduce = {action: reduce}
-        await axios.patch(`http://192.168.0.130:8080/cart/${id}/reduce`, {
+        await axios.patch(`http://192.168.43.134:8080/cart/${id}/reduce`, {
             headers: {
                 authorization: token
             }
@@ -66,7 +66,7 @@ class CartList extends Component {
       addCart = async (id) => {
         const token = await AsyncStorage.getItem('token');
         // const add = {action: add}
-        await axios.patch(`http://192.168.0.130:8080/cart/${id}/add`,{
+        await axios.patch(`http://192.168.43.134:8080/cart/${id}/add`,{
             headers: {
                 authorization: token
             }
@@ -119,7 +119,7 @@ class CartList extends Component {
                                             </View>
                                         </View>
                                         <View  style={{position: 'absolute', right: 10}} >
-                                            <Image source={{uri: `http://192.168.0.130:8080/products/images/${item.product.image}`}} style={{height: 48, width: 48, margin: 5, marginTop: 25}}/>
+                                            <Image source={{uri: `http://192.168.43.134:8080/products/images/${item.product.image}`}} style={{height: 48, width: 48, margin: 5, marginTop: 25}}/>
                                         </View>
                                         <TouchableOpacity style={styles.wish} onPress={ () => this.handlerSubmit(item._id)}>
                                             <Image source={require('../Assests/images/icon/ico_trash.png')} style={{height: 20, width: 20}}/>

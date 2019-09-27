@@ -12,17 +12,24 @@ import {CheckBox} from 'react-native-elements'
 
 class Checkout extends Component {
     
-    // state = {
-    //     products: []
-    // }
-    // async componentDidMount() {
-    //     const ProdcutId = this.props.navigation.getParam('id');
-    //      await axios.get(`http://192.168.0.130:8080/products/${ProdcutId}`)
-    //     .then(res => this.setState({
-    //         products: res.data
-    //     }))
-        
-    // }
+    state = {
+        check: [],
+      };
+
+      componentDidMount() {
+          this.getAccount()
+      }
+
+      getAccount = async () => {
+          const token = await AsyncStorage.getItem('token')
+          axios.get(`http://192.168.43.134:8080/users`, {
+              headers: {
+                  authorization : token
+              }
+          }).then(res => this.setState({
+              check: res.data.data
+          }))
+      }
     render() {
         return (
                 <View style={{flex: 1, backgroundColor: '#F3F3F3'}}>

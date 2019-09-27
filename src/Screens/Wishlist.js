@@ -27,7 +27,7 @@ class Wishlist extends Component {
         const token = await AsyncStorage.getItem('token');
         axios
           .get(
-            `http://192.168.0.130:8080/wishlist`, {
+            `http://192.168.43.134:8080/wishlist`, {
                 headers: {
                     authorization : token
                 }
@@ -42,7 +42,7 @@ class Wishlist extends Component {
 
       handlerSubmit = async (id) => {
         const token = await AsyncStorage.getItem('token');
-        await axios.delete(`http://192.168.0.130:8080/wishlist/${id}`, {
+        await axios.delete(`hhttp://192.168.43.134:8080/wishlist/${id}`, {
             headers: {
                 authorization: token
             }
@@ -81,7 +81,7 @@ class Wishlist extends Component {
                                 <View backgroundColor='#f5f5f5' style={{flex: 1, justifyContent: 'center'}}>
                                     <TouchableOpacity style={styles.parent}>
                                         <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                                            <Image source={{uri: `http://192.168.0.130:8080/products/images/${item.product.image}`}} style={{height: 156, width: 156, margin: 5}}/>
+                                            <Image source={{uri: `http://192.168.43.134:8080/products/images/${item.product.image}`}} style={{height: 156, width: 156, margin: 5}}/>
                                         </View>
                                         <TouchableOpacity style={styles.wish} onPress={ () => this.handlerSubmit(item._id)}>
                                             <Image source={require('../Assests/images/icon/ic_favfilled.png')} style={{height: 20, width: 20}}/>

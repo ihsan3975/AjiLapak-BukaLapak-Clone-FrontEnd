@@ -24,7 +24,7 @@ class DetailProduct extends Component {
 
      async componentDidMount() {
         const ProdcutId = this.props.navigation.getParam('id');
-         await axios.get(`http://192.168.0.130:8080/products/${ProdcutId}`)
+         await axios.get(`http://192.168.43.134:8080/products/${ProdcutId}`)
         .then(res => this.setState({
             products: res.data
         }))
@@ -42,7 +42,7 @@ class DetailProduct extends Component {
     handlerSubmit = async (id) => {
         const token = await AsyncStorage.getItem('token')
         const data = {productId: id}
-        await axios.post(`http://192.168.0.130:8080/wishlist/`, data,
+        await axios.post(`http://192.168.43.134:8080/wishlist/`, data,
         {
             headers: {
                 authorization: token
@@ -116,7 +116,7 @@ class DetailProduct extends Component {
                 >
                     <View style={styles.scrollViewContent}>
                         <View style={styles.description}>
-                             {/* <Image source={{uri: `http://192.168.0.130:8080/products/images/${item.image}`}} 
+                             {/* <Image source={{uri: `http://192.168.43.134:8080/products/images/${item.image}`}} 
                             style={{height: 156, width: 156, margin: 5, backgroundColor: 'green'}}/> */}
 
                             <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -298,7 +298,7 @@ class DetailProduct extends Component {
                             styles.backgroundImage,
                             {opacity: imageOpacity, transform: [{translateY: imageTranslate}]},
                         ]}
-                        source={{uri : `http://192.168.0.130:8080/products/images/${item.image}`}}
+                        source={{uri : `http://192.168.43.134:8080/products/images/${item.image}`}}
                     />
                     <View style={styles.bar}>
                         <TouchableOpacity onPress={() => this.props.navigation.goBack()}>

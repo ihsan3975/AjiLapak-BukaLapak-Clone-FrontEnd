@@ -24,7 +24,7 @@ class CardProducts extends Component {
       async componentDidMount() {
         await axios
           .get(
-            `http://192.168.0.130:8080/products`
+            `http://192.168.43.134:8080/products`
           )
           .then(res =>
             this.setState({
@@ -55,7 +55,7 @@ class CardProducts extends Component {
                                           } 
                                         style={styles.parent}>
                                             <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                                                <Image source={{uri: `http://192.168.0.130:8080/products/images/${item.image}`}} style={{height: 145, width: 145, margin: 5, borderColor: '#e5e5e5', borderWidth: 1, borderRadius: 4}}/>
+                                                <Image source={{uri: `http://192.168.43.134:8080/products/images/${item.image}`}} style={{height: 145, width: 145, margin: 5, borderColor: '#e5e5e5', borderWidth: 1, borderRadius: 4}}/>
                                             </View>
                                             <Text style={styles.text} numberOfLines={2}>{item.name}</Text>
                                             <Text style={{fontSize: 12, position: 'absolute', bottom: 0, fontWeight: 'bold'}}>Rp{item.price}</Text>
